@@ -1,17 +1,9 @@
-
+import TaskForm from "../components/TaskForm";
 
 function AddTaskPage() {
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4">Add New Task</h1>
-
-        <input
-          type="text"
-          placeholder="Enter task..."
-          className="w-full border p-3 rounded-lg"
-        />
-      </div>
+    <div className="min-h-screen bg-[oklch(0.61_0.11_210.56)] flex justify-center pt-10">
+        <TaskForm/>
     </div>
   );
 }
