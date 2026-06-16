@@ -1,5 +1,6 @@
 import EmojiPickerButton from "./EmojiPickurButton";
 import FormInput from "./FormInput";
+import FormSelect from "./FormSelect";
 
 function TaskForm() {
   return (
@@ -11,7 +12,8 @@ function TaskForm() {
       <EmojiPickerButton />
 
     <FormInput label="Task Name *"/>
-    
+    <FormInput label="Task Deadline" type="date"/>
+    <FormSelect label="Category"/>
     </div>
   );
 }
