@@ -34,8 +34,8 @@ function FormSelect({ label }: FormSelectProps) {
           p-4
           rounded-2xl
           border
-          border-slate-500
-          text-white
+          border-black
+          text-black
           text-left
         "
       >

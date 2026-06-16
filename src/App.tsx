@@ -4,21 +4,15 @@ import { useEffect, useState } from "react";
 import { AddTaskButton } from "./components/AddTaskButton";
 import Home from "./pages/Home";
 import AddTaskPage from "./pages/AddTaskPage";
+import { APP_BACKGROUNDS } from "./constants/colors";
 
 function App() {
-const backgrounds = [
-  "#ef4444", // red
-  "#3b82f6", // blue
-  "#22c55e", // green
-  "#a855f7", // purple
-  "#1e293b", // slate
-];
 
   const [bgIndex, setBgIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setBgIndex((prev) => (prev + 1) % backgrounds.length);
+      setBgIndex((prev) => (prev + 1) % APP_BACKGROUNDS.length);
     }, 10000); // change every 10 seconds
 
     return () => clearInterval(interval);
@@ -29,7 +23,7 @@ const backgrounds = [
           <div
       className="min-h-screen"
       style={{
-        backgroundColor: backgrounds[bgIndex],
+        backgroundColor: APP_BACKGROUNDS[bgIndex],
         transition: "background-color 3s ease-in-out",
       }}
     >

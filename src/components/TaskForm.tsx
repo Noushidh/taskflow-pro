@@ -14,6 +14,7 @@ function TaskForm() {
     <FormInput label="Task Name *"/>
     <FormInput label="Task Deadline" type="date"/>
     <FormSelect label="Category"/>
+    <FormInput label="Description" type="text" height="h-30"/>
     </div>
   );
 }

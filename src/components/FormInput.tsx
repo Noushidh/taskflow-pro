@@ -1,20 +1,18 @@
 type FormInputProps = {
   label: string;
   type?: string;
+  height?: string;
 };
 
-function FormInput({
-  label,
-  type = "text",
-}: FormInputProps) {
+function FormInput({ label, type = "text", height = "" }: FormInputProps) {
   return (
-<div className="relative mt-6">
-  <input
-    type={type}
-    placeholder=" "
-    className="
+    <div className="relative mt-6">
+      <input
+        type={type}
+        placeholder=" "
+        className={`
       peer
-      w-full
+      w-100
       p-4
       rounded-2xl
       bg-transparent
@@ -23,11 +21,12 @@ function FormInput({
       text-black
       focus:outline-none
       focus:border-black
-    "
-  />
+      ${height}
+    `}
+      />
 
-  <label
-    className="
+      <label
+        className="
       absolute
       left-4
       px-2
@@ -43,10 +42,10 @@ function FormInput({
 
       text-black
     "
-  >
-    {label}
-  </label>
-</div>
+      >
+        {label}
+      </label>
+    </div>
   );
 }
 
