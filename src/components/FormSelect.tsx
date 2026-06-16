@@ -1,23 +1,83 @@
+import { useState } from "react";
+
 type FormSelectProps = {
   label: string;
 };
 
 function FormSelect({ label }: FormSelectProps) {
+  const [showCategories, setShowCategories] = useState(false);
+
+  const categories = [
+    { emoji: "💻", name: "Coding", color: "from-violet-500 to-purple-500" },
+    { emoji: "📚", name: "Education", color: "from-orange-400 to-orange-500" },
+    { emoji: "💼", name: "Work", color: "from-blue-500 to-cyan-500" },
+    { emoji: "👤", name: "Personal", color: "from-pink-400 to-purple-300" },
+    { emoji: "🎯", name: "Goals", color: "from-green-400 to-emerald-500" },
+    { emoji: "💪", name: "Health & Fitness", color: "from-yellow-300 to-yellow-500" },
+    { emoji: "🛒", name: "Shopping", color: "from-red-400 to-rose-500" },
+    { emoji: "💰", name: "Finance", color: "from-lime-400 to-green-500" },
+    { emoji: "📖", name: "Reading", color: "from-indigo-400 to-blue-500" },
+    { emoji: "🎨", name: "Creativity", color: "from-fuchsia-500 to-pink-500" },
+    { emoji: "✈️", name: "Travel", color: "from-sky-400 to-cyan-500" },
+    { emoji: "🎵", name: "Music", color: "from-purple-400 to-indigo-500" },
+    { emoji: "🎮", name: "Gaming", color: "from-red-500 to-orange-500" },
+    { emoji: "📅", name: "Other", color: "from-slate-500 to-slate-700" },
+  ];
+
   return (
     <div className="mt-6">
-      <label className="block mb-2 text-black">
+      <button
+        type="button"
+        onClick={() => setShowCategories(!showCategories)}
+        className="
+          w-full
+          p-4
+          rounded-2xl
+          border
+          border-slate-500
+          text-white
+          text-left
+        "
+      >
         {label}
-      </label>
+      </button>
 
-      <select className="w-full p-4 rounded-2xl border border-black">
-        <option value="">Select Category</option>
-        <option value="coding">💻 Coding</option>
-        <option value="education">📚 Education</option>
-        <option value="work">💼 Work</option>
-        <option value="personal">🏠 Personal</option>
-        <option value="goals">🎯 Goals</option>
-        <option value="other">📅 Other</option>
-      </select>
+      {showCategories && (
+        <div
+          className="
+            mt-4
+            max-h-[400px]
+            overflow-y-auto
+            rounded-3xl
+            p-4
+            bg-black/20
+            space-y-3
+          "
+        >
+          {categories.map((category) => (
+            <button
+              key={category.name}
+              type="button"
+              className={`
+                w-full
+                p-5
+                rounded-3xl
+                flex
+                items-center
+                gap-3
+                text-white
+                bg-gradient-to-r
+                ${category.color}
+                hover:scale-[1.02]
+                transition
+              `}
+            >
+              <span className="text-2xl">{category.emoji}</span>
+              <span className="font-semibold">{category.name}</span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
