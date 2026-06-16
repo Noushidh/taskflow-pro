@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export function Home() {
+ function Home() {
   const hour = new Date().getHours();
 
   let greeting = "";
@@ -41,7 +41,7 @@ export function Home() {
     return () => {
       clearInterval(interval);
     };
-  });
+  },[]);
   return (
     <div className="p-6">
       <div className="bg-white rounded-2xl shadow-lg p-6">
@@ -65,27 +65,4 @@ export function Home() {
     </div>
   );
 }
-
-export function Greet() {
-  return (
-    <>
-      <button
-        className="
-    fixed bottom-4 right-20
-    md:bottom-6 md:right-6
-    w-14 h-14 md:w-16 md:h-16
-    rounded-full
-    bg-green-400
-    text-white
-    text-3xl md:text-4xl
-    flex items-center justify-center
-    shadow-lg
-    animate-pulse
-    
-  "
-      >
-        +
-      </button>
-    </>
-  );
-}
+export default Home
