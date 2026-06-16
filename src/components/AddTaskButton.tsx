@@ -1,9 +1,13 @@
-
+import { useNavigate } from "react-router-dom";
 
 export function AddTaskButton() {
+  const navigate = useNavigate();
   return (
     <>
       <button
+        onClick={() => {
+          navigate("/add-task");
+        }}
         className="
     fixed bottom-4 right-20
     md:bottom-6 md:right-6
