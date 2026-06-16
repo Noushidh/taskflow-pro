@@ -47,7 +47,7 @@ function EmojiPickerButton() {
       </button>
       {showPicker && (
         <div>
-          <EmojiPicker
+          <EmojiPicker className="fixed inset-0 z-50"
             onEmojiClick={(emojiData) => {
               setEmoji(emojiData.emoji);
               setShowPicker(false);
@@ -60,7 +60,7 @@ function EmojiPickerButton() {
         mt-2
         px-4 py-2
         rounded-lg
-        bg-red-500
+        bg-black
         text-white
         cursor-pointer
       "
