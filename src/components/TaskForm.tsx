@@ -14,8 +14,16 @@ function TaskForm() {
   const [description, setDiscription] = useState("");
 
   const handleSubmit = () => {
-    const task = { emoji,taskName, deadline, category, description };
-    console.log(task)
+    if (!taskName.trim()) {
+      alert("task name wan");
+      return;
+    }
+    if (deadline && new Date(deadline) < new Date()) {
+      alert("Deadline cannot be in the past");
+      return;
+    }
+    const task = { emoji, taskName, deadline, category, description };
+    console.log(task);
     const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
     tasks.push(task);
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -28,13 +36,19 @@ function TaskForm() {
         Add New Task
       </h1>
 
-      <EmojiPickerButton emoji={emoji} setEmoji={setEmoji}/>
+      <EmojiPickerButton emoji={emoji} setEmoji={setEmoji} />
 
       <FormInput
         label="Task Name *"
         value={taskName}
         onChange={(e) => setTaskName(e.target.value)}
       />
+      {taskName.trim() && (
+        <small className={taskName.length > 50 ? "text-red-500" : "text-black"}>
+          {taskName.length}/50
+        </small>
+      )}
+
       <FormInput
         label="Task Deadline"
         type="datetime-local"
@@ -42,6 +56,7 @@ function TaskForm() {
         onChange={(e) => setDeadline(e.target.value)}
       />
       <FormSelect label="Category" value={category} onChange={setCategory} />
+
       <FormInput
         label="Description"
         type="text"
@@ -49,6 +64,14 @@ function TaskForm() {
         value={description}
         onChange={(e) => setDiscription(e.target.value)}
       />
+      {description.trim() && (
+        <small
+          className={description.length > 300 ? "text-red-700" : "text-black"}
+        >
+          {description.length}/300
+        </small>
+      )}
+
       <button
         onClick={handleSubmit}
         className="
