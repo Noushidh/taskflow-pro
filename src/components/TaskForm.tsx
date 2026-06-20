@@ -12,7 +12,7 @@ function TaskForm() {
       <EmojiPickerButton />
 
     <FormInput label="Task Name *"/>
-    <FormInput label="Task Deadline" type="date"/>
+    <FormInput label="Task Deadline" type="datetime-local"/>
     <FormSelect label="Category"/>
     <FormInput label="Description" type="text" height="h-30"/>
     <button 
