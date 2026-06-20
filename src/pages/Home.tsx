@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
- function Home() {
+function Home() {
+  const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    setTasks(storedTasks);
+  }, []);
+  
   const hour = new Date().getHours();
 
   let greeting = "";
@@ -41,7 +47,7 @@ import { motion, AnimatePresence } from "framer-motion";
     return () => {
       clearInterval(interval);
     };
-  },[]);
+  }, []);
   return (
     <div className="p-6">
       <div className="bg-white rounded-2xl shadow-lg p-6">
@@ -62,7 +68,14 @@ import { motion, AnimatePresence } from "framer-motion";
 
         <p className="text-gray-500 mt-2">Let's make today count.</p>
       </div>
+      {tasks.map((task: any, index) => (
+        <div key={index} className="p-4 border rounded mb-2">
+          <h2>{task.taskName}</h2>
+          <p>{task.description}</p>
+          <p>{task.deadline}</p>
+        </div>
+      ))}
     </div>
   );
 }
-export default Home
+export default Home;
