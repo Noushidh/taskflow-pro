@@ -3,8 +3,12 @@ import EmojiPicker from "emoji-picker-react";
 import { div, em } from "framer-motion/client";
 import { APP_BACKGROUNDS } from "../constants/colors";
 
-function EmojiPickerButton() {
-  const [emoji, setEmoji] = useState("😀");
+type EmojiPickerButtonProps = {
+  emoji: string;
+  setEmoji: React.Dispatch<React.SetStateAction<string>>;
+};
+
+function EmojiPickerButton({emoji,setEmoji}:EmojiPickerButtonProps) {
   const [showPicker, setShowPicker] = useState(false);
   const [bgIndex, setBgIndex] = useState(0);
 
