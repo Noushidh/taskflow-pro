@@ -3,17 +3,23 @@ import type { Category } from "./FormSelect";
 import EmojiPickerButton from "./EmojiPickurButton";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
+import { useNavigate } from "react-router-dom";
+
+
 
 function TaskForm() {
+  const navigate = useNavigate()
   const [taskName,setTaskName]=useState('')
   const [deadline,setDeadline]=useState('')
   const [category,setCategory]=useState<Category|null>(null)
   const [description,setDiscription]=useState('')
   const handleSubmit=()=>{
-     const task = {
-        taskName,deadline,category,description
-     }
+    const task = {taskName,deadline,category,description}
      console.log(task)
+     const tasks = JSON.parse(localStorage.getItem("tasks")||"[]")
+     tasks.push(task)
+     localStorage.setItem("tasks",JSON.stringify(tasks))
+     navigate("/")
   }
   return (
     <div className="max-w-lg mx-auto pb-20">
