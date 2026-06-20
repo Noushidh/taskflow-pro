@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { Category } from "./FormSelect";
 import EmojiPickerButton from "./EmojiPickurButton";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
@@ -6,7 +7,7 @@ import FormSelect from "./FormSelect";
 function TaskForm() {
   const [taskName,setTaskName]=useState('')
   const [deadline,setDeadline]=useState('')
-  const [category,setCategory]=useState('')
+  const [category,setCategory]=useState<Category|null>(null)
   const [description,setDiscription]=useState('')
   const handleSubmit=()=>{
      const task = {

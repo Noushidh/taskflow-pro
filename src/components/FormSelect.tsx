@@ -1,15 +1,21 @@
 import { useState } from "react";
 
+export type Category = {
+  emoji: string;
+  name: string;
+  color: string;
+};
+
 type FormSelectProps = {
   label: string;
-  value: string;
-  onChange: (value: string) => void;
+  value: Category | null;
+  onChange: (category: Category) => void;
 };
 
 function FormSelect({ label, value, onChange }: FormSelectProps) {
   const [showCategories, setShowCategories] = useState(false);
 
-  const categories = [
+  const categories: Category[] = [
     { emoji: "💻", name: "Coding", color: "from-violet-500 to-purple-500" },
     { emoji: "📚", name: "Education", color: "from-orange-400 to-orange-500" },
     { emoji: "💼", name: "Work", color: "from-blue-500 to-cyan-500" },
@@ -17,7 +23,7 @@ function FormSelect({ label, value, onChange }: FormSelectProps) {
     { emoji: "🎯", name: "Goals", color: "from-green-400 to-emerald-500" },
     {
       emoji: "💪",
-      name: "Health & Fitness",
+      name: "Health/Fitness",
       color: "from-yellow-300 to-yellow-500",
     },
     { emoji: "🛒", name: "Shopping", color: "from-red-400 to-rose-500" },
@@ -30,27 +36,55 @@ function FormSelect({ label, value, onChange }: FormSelectProps) {
     { emoji: "📅", name: "Other", color: "from-slate-500 to-slate-700" },
   ];
 
-  const handleSelect = (category: string) => {
+  const handleSelect = (category: Category) => {
     onChange(category);
     setShowCategories(false);
   };
 
   return (
     <div className="mt-6">
+      <label className="block mb-2 font-medium text-black">
+        {label}
+      </label>
+
       <button
         type="button"
         onClick={() => setShowCategories((prev) => !prev)}
-        className="
-          w-full
-          p-4
-          rounded-2xl
-          border
-          border-black
-          text-black
-          text-left
+  className="
+    w-full
+    p-4
+    rounded-2xl
+    border
+    border-black
+    text-black
+    flex
+    items-center
+    justify-between
         "
       >
-        {value || label}
+        {value ? (
+          <div
+            className={`
+              inline-flex
+              items-center
+              gap-2
+              px-4
+              py-2
+              rounded-full
+              font-medium
+              text-black
+              bg-gradient-to-r
+              ${value.color}
+            `}
+          >
+            <span>{value.emoji}</span>
+            <span>{value.name}</span>
+          </div>
+        ) : (
+          <span className="text-gray-400">Choose Category</span>
+        )}
+
+        <span className="text-xl">⌄</span>
       </button>
 
       {showCategories && (
@@ -69,7 +103,7 @@ function FormSelect({ label, value, onChange }: FormSelectProps) {
             <button
               key={category.name}
               type="button"
-              onClick={() => handleSelect(category.name)}
+              onClick={() => handleSelect(category)}
               className={`
                 w-full
                 p-5
