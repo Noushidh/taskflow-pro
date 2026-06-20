@@ -4,6 +4,7 @@ import EmojiPickerButton from "./EmojiPickurButton";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import { useNavigate } from "react-router-dom";
+import {notyf} from "../utils/notyf"
 
 function TaskForm() {
   const navigate = useNavigate();
@@ -15,11 +16,11 @@ function TaskForm() {
 
   const handleSubmit = () => {
     if (!taskName.trim()) {
-      alert("task name wan");
+      notyf.success("task name required");
       return;
     }
     if (deadline && new Date(deadline) < new Date()) {
-      alert("Deadline cannot be in the past");
+      notyf.success("Deadline cannot be in the past");
       return;
     }
     const task = { emoji, taskName, deadline, category, description };
