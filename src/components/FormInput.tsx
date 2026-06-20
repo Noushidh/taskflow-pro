@@ -1,14 +1,26 @@
+import type React from "react";
+
 type FormInputProps = {
   label: string;
   type?: string;
   height?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-function FormInput({ label, type = "text", height = "" }: FormInputProps) {
+function FormInput({
+  label,
+  type = "text",
+  height = "",
+  value,
+  onChange,
+}: FormInputProps) {
   return (
     <div className="relative mt-6">
       <input
         type={type}
+        value={value}
+        onChange={onChange}
         placeholder=" "
         className={`
       peer

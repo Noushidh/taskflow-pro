@@ -2,9 +2,11 @@ import { useState } from "react";
 
 type FormSelectProps = {
   label: string;
+  value: string;
+  onChange: (value: string) => void;
 };
 
-function FormSelect({ label }: FormSelectProps) {
+function FormSelect({ label, value, onChange }: FormSelectProps) {
   const [showCategories, setShowCategories] = useState(false);
 
   const categories = [
@@ -13,7 +15,11 @@ function FormSelect({ label }: FormSelectProps) {
     { emoji: "💼", name: "Work", color: "from-blue-500 to-cyan-500" },
     { emoji: "👤", name: "Personal", color: "from-pink-400 to-purple-300" },
     { emoji: "🎯", name: "Goals", color: "from-green-400 to-emerald-500" },
-    { emoji: "💪", name: "Health & Fitness", color: "from-yellow-300 to-yellow-500" },
+    {
+      emoji: "💪",
+      name: "Health & Fitness",
+      color: "from-yellow-300 to-yellow-500",
+    },
     { emoji: "🛒", name: "Shopping", color: "from-red-400 to-rose-500" },
     { emoji: "💰", name: "Finance", color: "from-lime-400 to-green-500" },
     { emoji: "📖", name: "Reading", color: "from-indigo-400 to-blue-500" },
@@ -24,11 +30,16 @@ function FormSelect({ label }: FormSelectProps) {
     { emoji: "📅", name: "Other", color: "from-slate-500 to-slate-700" },
   ];
 
+  const handleSelect = (category: string) => {
+    onChange(category);
+    setShowCategories(false);
+  };
+
   return (
     <div className="mt-6">
       <button
         type="button"
-        onClick={() => setShowCategories(!showCategories)}
+        onClick={() => setShowCategories((prev) => !prev)}
         className="
           w-full
           p-4
@@ -39,7 +50,7 @@ function FormSelect({ label }: FormSelectProps) {
           text-left
         "
       >
-        {label}
+        {value || label}
       </button>
 
       {showCategories && (
@@ -58,6 +69,7 @@ function FormSelect({ label }: FormSelectProps) {
             <button
               key={category.name}
               type="button"
+              onClick={() => handleSelect(category.name)}
               className={`
                 w-full
                 p-5

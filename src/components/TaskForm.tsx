@@ -1,8 +1,19 @@
+import { useState } from "react";
 import EmojiPickerButton from "./EmojiPickurButton";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 
 function TaskForm() {
+  const [taskName,setTaskName]=useState('')
+  const [deadline,setDeadline]=useState('')
+  const [category,setCategory]=useState('')
+  const [description,setDiscription]=useState('')
+  const handleSubmit=()=>{
+     const task = {
+        taskName,deadline,category,description
+     }
+     console.log(task)
+  }
   return (
     <div className="max-w-lg mx-auto pb-20">
       <h1 className="text-center text-4xl font-bold text-white">
@@ -11,12 +22,12 @@ function TaskForm() {
 
       <EmojiPickerButton />
 
-    <FormInput label="Task Name *"/>
-    <FormInput label="Task Deadline" type="datetime-local"/>
-    <FormSelect label="Category"/>
-    <FormInput label="Description" type="text" height="h-30"/>
+    <FormInput label="Task Name *" value={taskName} onChange={(e)=>setTaskName(e.target.value)}/>
+    <FormInput label="Task Deadline" type="datetime-local" value={deadline} onChange={(e)=>setDeadline(e.target.value)}/>
+    <FormSelect label="Category" value={category} onChange={setCategory}/>
+    <FormInput label="Description" type="text" height="h-30" value={description} onChange={(e)=>setDiscription(e.target.value)}/>
     <button 
-    type="submit"
+    onClick={handleSubmit}
       className="
           w-full
           mt-8
