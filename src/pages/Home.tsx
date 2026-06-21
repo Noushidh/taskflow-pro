@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
@@ -50,8 +51,8 @@ function Home() {
   }, []);
   return (
     <div className="p-6">
-<div
-  className="
+      <div
+        className="
     relative
     overflow-hidden
 
@@ -67,8 +68,8 @@ function Home() {
 
     shadow-[0_8px_32px_rgba(255,255,255,0.15)]
   "
->      
-  <h1 className="text-3xl font-bold mb-2">{greeting}</h1>
+      >
+        <h1 className="text-3xl font-bold mb-2">{greeting}</h1>
 
         <AnimatePresence mode="wait">
           <motion.p
@@ -86,11 +87,11 @@ function Home() {
         <p className="text-gray-500 mt-2">Let's make today count.</p>
       </div>
 
-<div className="mt-8 flex flex-col items-center gap-5">
-  {tasks.map((task: any, index) => (
-    <div
-      key={index}
-      className="
+      <div className="mt-8 flex flex-col items-center gap-5">
+        {tasks.map((task: any, index) => (
+          <div
+            key={index}
+            className="
         w-full max-w-md
         p-6
         rounded-[32px]
@@ -99,47 +100,50 @@ function Home() {
         border border-white/20
         shadow-xl
       "
-    >
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-4">
-        <span className="text-3xl">{task.emoji}</span>
+          >
 
-        <div>
-          <h2 className="text-xl font-bold text-white">
-            {task.taskName}
-          </h2>
+            <div className="relative" >
+              <button className="absolute top-4 right-4 text-white">
+                <BsThreeDotsVertical />
+              </button>
+            </div>
 
-          <p className="text-sm text-white/70">
-            {task.category?.name}
-          </p>
-        </div>
+            {/* Header */}
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-3xl">{task.emoji}</span>
+
+              <div>
+                <h2 className="text-xl font-bold text-white">
+                  {task.taskName}
+                </h2>
+
+                <p className="text-sm text-white/70">{task.category?.name}</p>
+              </div>
+            </div>
+
+            {/* Description */}
+            <p className="text-white/90 leading-relaxed mb-4">
+              {task.description}
+            </p>
+
+            {/* Footer */}
+            <div className="flex justify-between items-center border-t border-white/20 pt-3">
+              <span className="text-sm text-white/70">
+                📅 {new Date(task.deadline).toLocaleDateString()}
+              </span>
+
+              {task.category && (
+                <span
+                  className={`text-sm px-3 py-1 rounded-full text-white bg-gradient-to-r ${task.category.color}`}
+                >
+                  <span>{task.category.emoji}</span>
+                  <span>{task.category.name}</span>
+                </span>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
-
-      {/* Description */}
-      <p className="text-white/90 leading-relaxed mb-4">
-        {task.description}
-      </p>
-
-      {/* Footer */}
-      <div className="flex justify-between items-center border-t border-white/20 pt-3">
-        <span className="text-sm text-white/70">
-          📅 {new Date(task.deadline).toLocaleDateString()}
-        </span>
-
-{task.category && (
-  <span
-  className={`text-sm px-3 py-1 rounded-full text-white bg-gradient-to-r ${task.category.color}`}
-  >
-    <span>{task.category.emoji}</span>
-    <span>{task.category.name}</span>
-  </span>
-)}
-      </div>
-    </div>
-  ))}
-</div>
-
-
     </div>
   );
 }
