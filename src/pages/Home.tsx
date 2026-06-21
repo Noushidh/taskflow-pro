@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import TaskCard from "../components/TaskCard";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
+  const [openMenu,setOpenMenu] = useState<number|null>(null);
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
     setTasks(storedTasks);
@@ -92,6 +94,7 @@ function Home() {
           <div
             key={index}
             className="
+        relative    
         w-full max-w-md
         p-6
         rounded-[32px]
@@ -101,46 +104,25 @@ function Home() {
         shadow-xl
       "
           >
+            <button
+              className="absolute top-10 right-7 text-white"
+              onClick={() => setOpenMenu(openMenu === index ? null : index)}
+            >
+              <BsThreeDotsVertical />
+            </button>
 
-            <div className="relative" >
-              <button className="absolute top-4 right-4 text-white">
-                <BsThreeDotsVertical />
-              </button>
-            </div>
+            {openMenu === index && (
+              <div className="absolute top-12 right-4 bg-white rounded-lg shadow-lg z-10">
+                <button className="block px-4 py-2 hover:bg-gray-100">
+                  ✏️ Edit
+                </button>
 
-            {/* Header */}
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-3xl">{task.emoji}</span>
-
-              <div>
-                <h2 className="text-xl font-bold text-white">
-                  {task.taskName}
-                </h2>
-
-                <p className="text-sm text-white/70">{task.category?.name}</p>
+                <button className="block px-4 py-2 hover:bg-gray-100 text-red-500">
+                  🗑️ Delete
+                </button>
               </div>
-            </div>
-
-            {/* Description */}
-            <p className="text-white/90 leading-relaxed mb-4">
-              {task.description}
-            </p>
-
-            {/* Footer */}
-            <div className="flex justify-between items-center border-t border-white/20 pt-3">
-              <span className="text-sm text-white/70">
-                📅 {new Date(task.deadline).toLocaleDateString()}
-              </span>
-
-              {task.category && (
-                <span
-                  className={`text-sm px-3 py-1 rounded-full text-white bg-gradient-to-r ${task.category.color}`}
-                >
-                  <span>{task.category.emoji}</span>
-                  <span>{task.category.name}</span>
-                </span>
-              )}
-            </div>
+            )}
+            <TaskCard key={index} task={task}/>
           </div>
         ))}
       </div>
