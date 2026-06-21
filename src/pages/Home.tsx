@@ -5,7 +5,7 @@ import TaskCard from "../components/TaskCard";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
-  const [openMenu,setOpenMenu] = useState<number|null>(null);
+  const [openMenu, setOpenMenu] = useState<number | null>(null);
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
     setTasks(storedTasks);
@@ -57,17 +57,13 @@ function Home() {
         className="
     relative
     overflow-hidden
-
     rounded-3xl
     p-6
     mb-5
-
     bg-white/80
     backdrop-blur-xl
-
     border-5
     border-white/10
-
     shadow-[0_8px_32px_rgba(255,255,255,0.15)]
   "
       >
@@ -122,7 +118,7 @@ function Home() {
                 </button>
               </div>
             )}
-            <TaskCard key={index} task={task}/>
+            <TaskCard key={index} task={task} />
           </div>
         ))}
       </div>
