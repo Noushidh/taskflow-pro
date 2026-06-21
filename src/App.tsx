@@ -5,6 +5,7 @@ import { AddTaskButton } from "./components/AddTaskButton";
 import Home from "./pages/Home";
 import AddTaskPage from "./pages/AddTaskPage";
 import { APP_BACKGROUNDS } from "./constants/colors";
+import TaskForm from "./components/TaskForm";
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
           />
 
           <Route path="/add-task" element={<AddTaskPage />} />
+          <Route path="/edit/:index" element={<TaskForm/>}/>
         </Routes>
       </div>
     </BrowserRouter>

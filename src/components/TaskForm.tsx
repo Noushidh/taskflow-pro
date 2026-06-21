@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Category } from "./FormSelect";
 import type { Task } from "../types/Task";
 import EmojiPickerButton from "./EmojiPickurButton";
@@ -6,8 +6,7 @@ import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import { useNavigate } from "react-router-dom";
 import { notyf } from "../utils/notyf";
-
-
+import { useParams } from "react-router-dom";
 
 function TaskForm() {
   const navigate = useNavigate();
@@ -16,6 +15,22 @@ function TaskForm() {
   const [deadline, setDeadline] = useState("");
   const [category, setCategory] = useState<Category | null>(null);
   const [description, setDiscription] = useState("");
+
+  const { index } = useParams();
+  useEffect(() => {
+    if (index !== undefined) {
+      const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+
+      const task = tasks[Number(index)];
+
+      setEmoji(task.emoji);
+      setTaskName(task.taskName);
+      setDeadline(task.deadline);
+      setCategory(task.category);
+      setDiscription(task.description);
+    }
+  }, [index]);
+
   const handleSubmit = () => {
     if (!taskName.trim()) {
       notyf.error("task name required");
@@ -34,7 +49,11 @@ function TaskForm() {
     };
 
     const tasks: Task[] = JSON.parse(localStorage.getItem("tasks") || "[]");
-    tasks.push(task);
+    if (index !== undefined) {
+      tasks[Number(index)] = task;
+    } else {
+      tasks.push(task);
+    }
     localStorage.setItem("tasks", JSON.stringify(tasks));
     navigate("/");
   };
@@ -42,7 +61,7 @@ function TaskForm() {
   return (
     <div className="max-w-lg mx-auto pb-20">
       <h1 className="text-center text-4xl font-bold text-white">
-        Add New Task
+        {index !== undefined ? "Edit Task" : "Add New Task"}
       </h1>
 
       <EmojiPickerButton emoji={emoji} setEmoji={setEmoji} />

@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import TaskCard from "../components/TaskCard";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
   const [openMenu,setOpenMenu] = useState<number|null>(null);
+  const navigate = useNavigate()
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
     setTasks(storedTasks);
@@ -113,7 +115,9 @@ function Home() {
 
             {openMenu === index && (
               <div className="absolute top-12 right-4 bg-white rounded-lg shadow-lg z-10">
-                <button className="block px-4 py-2 hover:bg-gray-100">
+                <button className="block px-4 py-2 hover:bg-gray-100"
+                onClick={()=>navigate(`/edit/${index}`)}
+                >
                   ✏️ Edit
                 </button>
 
