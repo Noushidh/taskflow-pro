@@ -1,10 +1,13 @@
 import { useState } from "react";
 import type { Category } from "./FormSelect";
+import type { Task } from "../types/Task";
 import EmojiPickerButton from "./EmojiPickurButton";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import { useNavigate } from "react-router-dom";
-import {notyf} from "../utils/notyf"
+import { notyf } from "../utils/notyf";
+
+
 
 function TaskForm() {
   const navigate = useNavigate();
@@ -13,19 +16,24 @@ function TaskForm() {
   const [deadline, setDeadline] = useState("");
   const [category, setCategory] = useState<Category | null>(null);
   const [description, setDiscription] = useState("");
-
   const handleSubmit = () => {
     if (!taskName.trim()) {
-      notyf.success("task name required");
+      notyf.error("task name required");
       return;
     }
     if (deadline && new Date(deadline) < new Date()) {
-      notyf.success("Deadline cannot be in the past");
+      notyf.error("Deadline cannot be in the past");
       return;
     }
-    const task = { emoji, taskName, deadline, category, description };
-    console.log(task);
-    const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    const task: Task = {
+      emoji,
+      taskName,
+      deadline,
+      category,
+      description,
+    };
+
+    const tasks: Task[] = JSON.parse(localStorage.getItem("tasks") || "[]");
     tasks.push(task);
     localStorage.setItem("tasks", JSON.stringify(tasks));
     navigate("/");
