@@ -13,14 +13,13 @@ function TaskForm() {
   const [deadline, setDeadline] = useState("");
   const [category, setCategory] = useState<Category | null>(null);
   const [description, setDiscription] = useState("");
-
   const handleSubmit = () => {
     if (!taskName.trim()) {
-      notyf.success("task name required");
+      notyf.error("task name required");
       return;
     }
     if (deadline && new Date(deadline) < new Date()) {
-      notyf.success("Deadline cannot be in the past");
+      notyf.error("Deadline cannot be in the past");
       return;
     }
     const task = { emoji, taskName, deadline, category, description };

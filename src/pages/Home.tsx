@@ -86,28 +86,60 @@ function Home() {
         <p className="text-gray-500 mt-2">Let's make today count.</p>
       </div>
 
-      <div className="mt-8 flex flex-col items-center gap-4">
-        {tasks.map((task: any, index) => (
-          <div
-            key={index}
-            className="   w-full
-    max-w-md
-    p-6
-    rounded-[32px]
-    bg-white/5
-    backdrop-blur-xl
-    border
-    border-white/20
-    shadow-lg"
-          >
-            <h2>{task.taskName}</h2>
-            <h3>{task.emoji}</h3>
-            <p>{task.description}</p>
-            <p>{task.category?.name}</p>
-            <p>{task.deadline}</p>
-          </div>
-        ))}
+<div className="mt-8 flex flex-col items-center gap-5">
+  {tasks.map((task: any, index) => (
+    <div
+      key={index}
+      className="
+        w-full max-w-md
+        p-6
+        rounded-[32px]
+        bg-white/10
+        backdrop-blur-xl
+        border border-white/20
+        shadow-xl
+      "
+    >
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-4">
+        <span className="text-3xl">{task.emoji}</span>
+
+        <div>
+          <h2 className="text-xl font-bold text-white">
+            {task.taskName}
+          </h2>
+
+          <p className="text-sm text-white/70">
+            {task.category?.name}
+          </p>
+        </div>
       </div>
+
+      {/* Description */}
+      <p className="text-white/90 leading-relaxed mb-4">
+        {task.description}
+      </p>
+
+      {/* Footer */}
+      <div className="flex justify-between items-center border-t border-white/20 pt-3">
+        <span className="text-sm text-white/70">
+          📅 {new Date(task.deadline).toLocaleDateString()}
+        </span>
+
+{task.category && (
+  <span
+  className={`text-sm px-3 py-1 rounded-full text-white bg-gradient-to-r ${task.category.color}`}
+  >
+    <span>{task.category.emoji}</span>
+    <span>{task.category.name}</span>
+  </span>
+)}
+      </div>
+    </div>
+  ))}
+</div>
+
+
     </div>
   );
 }
