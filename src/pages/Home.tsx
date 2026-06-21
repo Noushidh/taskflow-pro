@@ -7,7 +7,7 @@ function Home() {
     const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
     setTasks(storedTasks);
   }, []);
-  
+
   const hour = new Date().getHours();
 
   let greeting = "";
@@ -50,8 +50,25 @@ function Home() {
   }, []);
   return (
     <div className="p-6">
-      <div className="bg-white rounded-2xl shadow-lg p-6">
-        <h1 className="text-3xl font-bold mb-2">{greeting}</h1>
+<div
+  className="
+    relative
+    overflow-hidden
+
+    rounded-3xl
+    p-6
+    mb-5
+
+    bg-white/80
+    backdrop-blur-xl
+
+    border-5
+    border-white/10
+
+    shadow-[0_8px_32px_rgba(255,255,255,0.15)]
+  "
+>      
+  <h1 className="text-3xl font-bold mb-2">{greeting}</h1>
 
         <AnimatePresence mode="wait">
           <motion.p
@@ -68,13 +85,29 @@ function Home() {
 
         <p className="text-gray-500 mt-2">Let's make today count.</p>
       </div>
-      {tasks.map((task: any, index) => (
-        <div key={index} className="p-4 border rounded mb-2">
-          <h2>{task.taskName}</h2>
-          <p>{task.description}</p>
-          <p>{task.deadline}</p>
-        </div>
-      ))}
+
+      <div className="mt-8 flex flex-col items-center gap-4">
+        {tasks.map((task: any, index) => (
+          <div
+            key={index}
+            className="   w-full
+    max-w-md
+    p-6
+    rounded-[32px]
+    bg-white/5
+    backdrop-blur-xl
+    border
+    border-white/20
+    shadow-lg"
+          >
+            <h2>{task.taskName}</h2>
+            <h3>{task.emoji}</h3>
+            <p>{task.description}</p>
+            <p>{task.category?.name}</p>
+            <p>{task.deadline}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
