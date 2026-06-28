@@ -3,11 +3,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import TaskCard from "../components/TaskCard";
 import { useNavigate } from "react-router-dom";
+import DeleteTask from "../components/DeleteTask";
+import { notyf } from "../utils/notyf";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
-  const [openMenu,setOpenMenu] = useState<number|null>(null);
-  const navigate = useNavigate()
+  const [openMenu, setOpenMenu] = useState<number | null>(null);
+  const [deleteTask, setDeleteTask] = useState<{
+    index: number;
+    emoji: string;
+    title: string;
+  } | null>(null);
+
+  const navigate = useNavigate();
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
     setTasks(storedTasks);
@@ -53,6 +61,14 @@ function Home() {
       clearInterval(interval);
     };
   }, []);
+  const handleDelete = (indexToDelete: number) => {
+    const updatedTasks = tasks.filter((_, index) => index !== indexToDelete);
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    setDeleteTask(null);
+    setOpenMenu(null);
+    notyf.success("Task deleted successfully!");
+  };
   return (
     <div className="p-6">
       <div
@@ -115,20 +131,43 @@ function Home() {
 
             {openMenu === index && (
               <div className="absolute top-12 right-4 bg-white rounded-lg shadow-lg z-10">
-                <button className="block px-4 py-2 hover:bg-gray-100"
-                onClick={()=>navigate(`/edit/${index}`)}
+                <button
+                  className="block px-4 py-2 hover:bg-gray-100"
+                  onClick={() => navigate(`/edit/${index}`)}
                 >
                   ✏️ Edit
                 </button>
+                <button
+                  className="block px-4 py-2 hover:bg-gray-100 text-red-500"
+                  onClick={() => {
+                    setDeleteTask({
+                      index,
+                      emoji: task.emoji,
+                      title: task.taskName,
+                    });
 
-                <button className="block px-4 py-2 hover:bg-gray-100 text-red-500">
+                    setOpenMenu(null);
+                  }}
+                >
                   🗑️ Delete
-                </button>
+                </button>{" "}
               </div>
             )}
-            <TaskCard key={index} task={task}/>
+            <TaskCard key={index} task={task} />
           </div>
         ))}
+        <DeleteTask
+          open={deleteTask !== null}
+          emoji={deleteTask?.emoji ?? ""}
+          title={deleteTask?.title ?? ""}
+          onClose={() => setDeleteTask(null)}
+          onDelete={() => {
+            if (deleteTask) {
+              handleDelete(deleteTask.index);
+              setDeleteTask(null);
+            }
+          }}
+        />
       </div>
     </div>
   );
