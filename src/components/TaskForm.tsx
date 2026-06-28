@@ -48,6 +48,8 @@ function TaskForm() {
       deadline,
       category,
       description,
+      pinned:false,
+      completed:false,
     };
 
     const tasks: Task[] = JSON.parse(localStorage.getItem("tasks") || "[]");

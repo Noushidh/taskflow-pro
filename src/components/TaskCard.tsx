@@ -1,4 +1,5 @@
 import type { Task } from "../types/Task";
+import { BsPinAngleFill } from "react-icons/bs";
 
 type Props = {
   task: Task;
@@ -7,7 +8,26 @@ type Props = {
 function TaskCard({ task }: Props) {
   return (
     <div>
-      {/* Header */}
+      {task.pinned && (
+        <div
+          className="
+      absolute
+      top-5
+      right-16
+      flex
+      items-center
+      gap-1
+      rounded-full
+      bg-white
+      px-3
+      py-1
+      shadow-lg
+    "
+        >
+          <BsPinAngleFill className="text-sm text-yellow-500 rotate-45" />
+          <span className="text-xs font-semibold text-yellow-500">Pinned</span>
+        </div>
+      )}
       <div className="flex items-center gap-3 mb-4">
         <span className="text-3xl">{task.emoji}</span>
 
@@ -24,7 +44,15 @@ function TaskCard({ task }: Props) {
       {/* Footer */}
       <div className="flex justify-between items-center border-t border-white/20 pt-3">
         <span className="text-sm text-white/70">
-          📅 {new Date(task.deadline).toLocaleDateString()}
+          📅{" "}
+          {new Date(task.deadline).toLocaleString("en-IN", {
+            weekday: "short",
+            day: "numeric",
+            month: "short",
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true,
+          })}
         </span>
 
         {task.category && (

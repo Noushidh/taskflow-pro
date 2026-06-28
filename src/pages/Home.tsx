@@ -5,10 +5,13 @@ import TaskCard from "../components/TaskCard";
 import { useNavigate } from "react-router-dom";
 import DeleteTask from "../components/DeleteTask";
 import { notyf } from "../utils/notyf";
+import type { Task } from "../types/Task";
+import ShowDetails from "../components/ShowTaskDetails";
 
 function Home() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [openMenu, setOpenMenu] = useState<number | null>(null);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [deleteTask, setDeleteTask] = useState<{
     index: number;
     emoji: string;
@@ -63,12 +66,50 @@ function Home() {
   }, []);
   const handleDelete = (indexToDelete: number) => {
     const updatedTasks = tasks.filter((_, index) => index !== indexToDelete);
+
     setTasks(updatedTasks);
+
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+
     setDeleteTask(null);
+
     setOpenMenu(null);
+
     notyf.success("Task deleted successfully!");
   };
+
+  const handlePin = (index: number) => {
+    const updatedTasks = [...tasks];
+
+    updatedTasks[index].pinned = !updatedTasks[index].pinned;
+
+    updatedTasks.sort((a, b) => Number(b.pinned) - Number(a.pinned));
+
+    setTasks(updatedTasks);
+
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+
+    setOpenMenu(null);
+  };
+
+  const handleComplete = (index: number) => {
+    const updateTasks = [...tasks];
+
+    updateTasks[index].completed = !updateTasks[index].completed;
+
+    setTasks(updateTasks);
+
+    localStorage.setItem("tasks", JSON.stringify(updateTasks));
+
+    setOpenMenu(null);
+
+    notyf.success(
+      updateTasks[index].completed
+        ? "Task completed!"
+        : "Task marked as incomplete!",
+    );
+  };
+
   return (
     <div className="p-6">
       <div
@@ -108,7 +149,7 @@ function Home() {
       </div>
 
       <div className="mt-8 flex flex-col items-center gap-5">
-        {tasks.map((task: any, index) => (
+        {tasks.map((task, index) => (
           <div
             key={index}
             className="
@@ -130,12 +171,33 @@ function Home() {
             </button>
 
             {openMenu === index && (
-              <div className="absolute top-12 right-4 bg-white rounded-lg shadow-lg z-10">
+              <div className="absolute top-3 right-4 bg-white rounded-lg shadow-lg overflow-visible">
+                <button
+                  className="block px-4 py-2 hover:bg-gray-100"
+                  onClick={() => handlePin(index)}
+                >
+                  {task.pinned ? "📍 Unpin" : "📌 Pin"}
+                </button>
                 <button
                   className="block px-4 py-2 hover:bg-gray-100"
                   onClick={() => navigate(`/edit/${index}`)}
                 >
                   ✏️ Edit
+                </button>
+                <button
+                  className="block px-4 py-2 hover:bg-gray-100"
+                  onClick={() => handleComplete(index)}
+                >
+                  {task.completed ? "↩️ Mark Incomplete" : "✅ Complete"}
+                </button>{" "}
+                <button
+                  className="block px-4 py-2 hover:bg-gray-100"
+                  onClick={() => {
+                    setSelectedTask(task);
+                    setOpenMenu(null);
+                  }}
+                >
+                  👁️Details
                 </button>
                 <button
                   className="block px-4 py-2 hover:bg-gray-100 text-red-500"
@@ -156,6 +218,13 @@ function Home() {
             <TaskCard key={index} task={task} />
           </div>
         ))}
+
+        <ShowDetails
+          open={selectedTask !== null}
+          task={selectedTask}
+          onClose={() => setSelectedTask(null)}
+        />
+
         <DeleteTask
           open={deleteTask !== null}
           emoji={deleteTask?.emoji ?? ""}

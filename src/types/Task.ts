@@ -6,4 +6,6 @@ export type Task = {
   deadline: string;
   category: Category | null;
   description: string;
+  pinned: boolean;
+  completed: boolean;
 };
