@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 
 import { AddTaskButton } from "./components/AddTaskButton";
 import Home from "./pages/Home";
-import AddTaskPage from "./pages/AddTaskPage";
+import AddTaskPage from "./pages/TaskFormPage";
 import { APP_BACKGROUNDS } from "./constants/colors";
-import TaskForm from "./components/TaskForm";
 
 function App() {
 
@@ -40,7 +39,7 @@ function App() {
           />
 
           <Route path="/add-task" element={<AddTaskPage />} />
-          <Route path="/edit/:index" element={<TaskForm/>}/>
+          <Route path="/edit/:index" element={<AddTaskPage/>}/>
         </Routes>
       </div>
     </BrowserRouter>

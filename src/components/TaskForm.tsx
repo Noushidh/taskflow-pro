@@ -17,8 +17,10 @@ function TaskForm() {
   const [description, setDiscription] = useState("");
 
   const { index } = useParams();
+  const isEditing = index !== undefined;
+
   useEffect(() => {
-    if (index !== undefined) {
+    if (isEditing) {
       const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
       const task = tasks[Number(index)];
@@ -29,7 +31,7 @@ function TaskForm() {
       setCategory(task.category);
       setDiscription(task.description);
     }
-  }, [index]);
+  }, [index, isEditing]);
 
   const handleSubmit = () => {
     if (!taskName.trim()) {
@@ -49,10 +51,12 @@ function TaskForm() {
     };
 
     const tasks: Task[] = JSON.parse(localStorage.getItem("tasks") || "[]");
-    if (index !== undefined) {
+    if (isEditing) {
       tasks[Number(index)] = task;
+      notyf.success("Task updated successfully!");
     } else {
       tasks.push(task);
+      notyf.success("Task created successfully!");
     }
     localStorage.setItem("tasks", JSON.stringify(tasks));
     navigate("/");
@@ -112,7 +116,7 @@ function TaskForm() {
           font-semibold
         "
       >
-        Create Task
+        {isEditing ? "Update Task" : "Create Task"}
       </button>
     </div>
   );
