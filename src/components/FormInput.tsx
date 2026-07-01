@@ -42,8 +42,7 @@ function FormInput({
       absolute
       left-4
       px-2
-      bg-[oklch(0.61_0.11_210.56)]
-      transition-all
+bg-blue-500      transition-all
       duration-200
 
       peer-placeholder-shown:top-4

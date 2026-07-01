@@ -43,14 +43,12 @@ function FormSelect({ label, value, onChange }: FormSelectProps) {
 
   return (
     <div className="mt-6">
-      <label className="block mb-2 font-medium text-black">
-        {label}
-      </label>
+      <label className="block mb-2 font-medium text-black">{label}</label>
 
       <button
         type="button"
         onClick={() => setShowCategories((prev) => !prev)}
-  className="
+        className="
     w-full
     p-4
     rounded-2xl
@@ -81,10 +79,22 @@ function FormSelect({ label, value, onChange }: FormSelectProps) {
             <span>{value.name}</span>
           </div>
         ) : (
-          <span className="text-gray-400">Choose Category</span>
+          <span className="text-black">Choose Category</span>
         )}
-
-        <span className="text-xl">⌄</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2.5}
+          stroke="currentColor"
+          className="w-5 h-5 text-white/80 transition-transform duration-200"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+          />
+        </svg>{" "}
       </button>
 
       {showCategories && (

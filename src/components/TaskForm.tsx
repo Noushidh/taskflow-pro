@@ -108,15 +108,26 @@ function TaskForm() {
 
       <button
         onClick={handleSubmit}
-        className="
-          w-full
-          mt-8
-          p-4
-          rounded-2xl
-          bg-red-500
-          text-white
-          font-semibold
-        "
+className="
+  w-full
+  mt-8
+  p-4
+  rounded-2xl
+  font-semibold
+  
+  bg-white/0
+  hover:bg-white/10
+  text-white
+  transition-all
+  duration-200
+  
+  border-3 border-white/40
+  hover:border-white/80
+  backdrop-blur-md
+  
+  hover:scale-[1.02]
+  active:scale-[0.98]
+"
       >
         {isEditing ? "Update Task" : "Create Task"}
       </button>

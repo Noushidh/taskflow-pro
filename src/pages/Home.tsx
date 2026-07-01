@@ -124,19 +124,26 @@ function Home() {
     <div className="p-6">
       <div
         className="
-          relative
-          overflow-hidden
-          rounded-3xl
-          p-6
-          mb-5
-          bg-white/80
-          backdrop-blur-xl
-          border-5
-          border-white/10
-          shadow-[0_8px_32px_rgba(255,255,255,0.15)]
-        "
+  relative
+  overflow-hidden
+  rounded-3xl
+  p-6
+  mb-5
+  
+  bg-gradient-to-br from-white/[0.12] via-white/[0.01] to-black/[0.2]
+  backdrop-blur-2xl
+  
+  before:absolute before:inset-0
+  before:bg-gradient-to-r before:from-transparent before:via-white/[0.06] before:to-transparent
+  before:-rotate-45 before:scale-150
+  before:pointer-events-none
+  
+  border-2 border-t-white/[0.25] border-l-white/[0.15] border-r-black/[0.15] border-b-black/[0.3]
+  
+  shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5),_inset_0_1px_0_rgba(255,255,255,0.4)]
+"
       >
-        <h1 className="text-3xl font-bold mb-2">{greeting}</h1>
+        <h1 className="text-3xl  font-bold mb-2">{greeting}</h1>
 
         <AnimatePresence mode="wait">
           <motion.p
@@ -151,7 +158,7 @@ function Home() {
           </motion.p>
         </AnimatePresence>
 
-        <p className="text-gray-500 mt-2">Let's make today count.</p>
+        <p className="text-gray-700 mt-2">Let's make today count.</p>
       </div>
 
       <div className="mt-8 flex flex-col items-center gap-5 w-full">
@@ -192,18 +199,32 @@ function Home() {
             return (
               <div
                 key={idx}
-                className={`
-                  relative    
-                  w-full max-w-md
-                  p-6
-                  rounded-[32px]
-                  bg-white/10
-                  backdrop-blur-xl
-                  border border-white/20
-                  shadow-xl
-                  transition-all duration-200
-                  ${isMenuOpen ? "z-40" : "z-10"}
-                `}
+className={`
+  relative    
+  w-full max-w-md
+  p-6
+  rounded-[32px]
+  transition-all duration-200
+  
+  bg-gradient-to-br from-slate-950/70 via-white/[0.03] to-slate-900/50
+  backdrop-blur-3xl
+  
+  before:absolute before:inset-0
+  before:rounded-[32px]
+  before:bg-gradient-to-bl before:from-fuchsia-500/10 before:via-violet-600/5 before:to-cyan-400/10
+  before:pointer-events-none
+  
+  border border-white/[0.18]
+  
+  shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6),_0_0_40px_rgba(236,72,153,0.12),_inset_0_1px_2px_rgba(255,255,255,0.25)]
+  
+  hover:scale-[1.015]
+  hover:border-white/[0.28]
+  hover:shadow-[0_30px_60px_-10px_rgba(0,0,0,0.7),_0_0_50px_rgba(168,85,247,0.25),_inset_0_1px_3px_rgba(255,255,255,0.4)]
+  
+  task-card-container
+  ${isMenuOpen ? "z-40" : "z-10"}
+`}
               >
                 <button
                   className="absolute top-6 right-6 p-2 rounded-full transition-colors hover:bg-white/10 text-white z-20"
