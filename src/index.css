@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@keyframes vibrateClock {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-15deg);
+  }
+  20% {
+    transform: rotate(15deg);
+  }
+  30% {
+    transform: rotate(-12deg);
+  }
+  40% {
+    transform: rotate(12deg);
+  }
+  50% {
+    transform: rotate(-8deg);
+  }
+  60% {
+    transform: rotate(8deg);
+  }
+  70% {
+    transform: rotate(-5deg);
+  }
+  80% {
+    transform: rotate(5deg);
+  }
+  90%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-vibrate {
+  display: inline-block;
+  transform-origin: top center;
+  animation: vibrateClock 1.2s ease-in-out infinite;
+}
