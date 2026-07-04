@@ -48,8 +48,8 @@ function TaskForm() {
       deadline,
       category,
       description,
-      pinned:false,
-      completed:false,
+      pinned: false,
+      completed: false,
     };
 
     const tasks: Task[] = JSON.parse(localStorage.getItem("tasks") || "[]");
@@ -65,7 +65,7 @@ function TaskForm() {
   };
 
   return (
-    <div className="max-w-lg mx-auto pb-20">
+    <div className="w-full max-w-lg mx-auto px-4 pb-20">
       <h1 className="text-center text-4xl font-bold text-white">
         {index !== undefined ? "Edit Task" : "Add New Task"}
       </h1>
@@ -108,7 +108,7 @@ function TaskForm() {
 
       <button
         onClick={handleSubmit}
-className="
+        className="
   w-full
   mt-8
   p-4

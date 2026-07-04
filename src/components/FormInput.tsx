@@ -24,7 +24,7 @@ function FormInput({
         placeholder=" "
         className={`
       peer
-      w-100
+      w-full
       p-4
       rounded-2xl
       bg-transparent
@@ -37,23 +37,21 @@ function FormInput({
     `}
       />
 
-      <label
-        className="
-      absolute
-      left-4
-      px-2
-bg-blue-500      transition-all
-      duration-200
-
-      peer-placeholder-shown:top-4
-      peer-placeholder-shown:text-base
-
-      peer-focus:-top-3
-      peer-focus:text-sm
-
-      text-black
-    "
-      >
+<label
+  className="
+    absolute
+    left-4
+    px-2
+    bg-blue-500
+    transition-all
+    duration-200
+    peer-placeholder-shown:top-4
+    peer-placeholder-shown:text-base
+    peer-focus:-top-3
+    peer-focus:text-sm
+    text-black
+  "
+>
         {label}
       </label>
     </div>

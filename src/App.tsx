@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setBgIndex((prev) => (prev + 1) % APP_BACKGROUNDS.length);
-    }, 10000); // change every 10 seconds
+    }, 10000); 
 
     return () => clearInterval(interval);
   }, []);
