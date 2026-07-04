@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import EmojiPicker from "emoji-picker-react";
-import { div, em } from "framer-motion/client";
 import { APP_BACKGROUNDS } from "../constants/colors";
 
 type EmojiPickerButtonProps = {
@@ -15,7 +14,7 @@ function EmojiPickerButton({emoji,setEmoji}:EmojiPickerButtonProps) {
   useEffect(() => {
     const interval = setInterval(() => {
       setBgIndex((prev) => (prev + 1) % APP_BACKGROUNDS.length);
-    }, 10000); // change every 10 seconds
+    }, 10000); 
 
     return () => clearInterval(interval);
   }, []);
