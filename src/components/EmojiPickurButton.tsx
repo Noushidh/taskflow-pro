@@ -7,14 +7,14 @@ type EmojiPickerButtonProps = {
   setEmoji: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function EmojiPickerButton({emoji,setEmoji}:EmojiPickerButtonProps) {
+function EmojiPickerButton({ emoji, setEmoji }: EmojiPickerButtonProps) {
   const [showPicker, setShowPicker] = useState(false);
   const [bgIndex, setBgIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setBgIndex((prev) => (prev + 1) % APP_BACKGROUNDS.length);
-    }, 10000); 
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
@@ -61,28 +61,22 @@ function EmojiPickerButton({emoji,setEmoji}:EmojiPickerButtonProps) {
         {emoji === "😀" ? "+" : "✏️"}
       </button>
       {showPicker && (
-        <div>
-          <EmojiPicker
-            className="fixed inset-0 z-50"
-            onEmojiClick={(emojiData) => {
-              setEmoji(emojiData.emoji);
-              setShowPicker(false);
-            }}
-          />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="relative">
+            <EmojiPicker
+              onEmojiClick={(emojiData) => {
+                setEmoji(emojiData.emoji);
+                setShowPicker(false);
+              }}
+            />
 
-          <button
-            onClick={() => setShowPicker(false)}
-            className="
-        mt-2
-        px-4 py-2
-        rounded-lg
-        bg-black
-        text-white
-        cursor-pointer
-      "
-          >
-            Cancel
-          </button>
+            <button
+              onClick={() => setShowPicker(false)}
+              className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-red-500 text-white"
+            >
+              ✕
+            </button>
+          </div>
         </div>
       )}
     </div>
