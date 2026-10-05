@@ -2,7 +2,7 @@
 
 > A modern, user-friendly task management application designed to make everyday productivity simple, organized, and enjoyable.
 
-TaskFlow is a responsive task management application built with **React, TypeScript, and Vite**. It provides an engaging interface for creating, organizing, and managing tasks with features such as emojis, task pinning, editing, completion tracking, detailed views, and user-friendly notifications.
+TaskFlow is a responsive task management application built with **React, TypeScript, Tailwind CSS, and Vite**. It provides an engaging interface for creating, organizing, and managing tasks with features such as emojis, task pinning, editing, completion tracking, detailed views, and user-friendly notifications.
 
 🚀 **Live Demo:**  
 https://taskflow-pro-two-tan.vercel.app/
@@ -64,16 +64,7 @@ The project is built with a **component-based React architecture** and uses **Ty
 - Utility-based application structure
 - Maintainable project organization
 - Production-ready Vite build
-
----
-
-## 🖥️ Live Demo
-
-Experience TaskFlow:
-
-### 👉 https://taskflow-pro-two-tan.vercel.app/
-
----
+  
 
 ## 🛠️ Tech Stack
 
@@ -165,7 +156,6 @@ taskflow/
 │   ├── index.css
 │   └── main.tsx
 │
-├── public/
 ├── .gitignore
 ├── eslint.config.js
 ├── index.html
@@ -178,7 +168,6 @@ taskflow/
 └── README.md
 ```
 
-```markdown
 ## 🎯 Key Concepts Demonstrated
 
 - ⚛️ React component-based architecture
@@ -198,7 +187,7 @@ taskflow/
 - 🚀 Production deployment with Vercel
 
 ---
-```
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -212,4 +201,4 @@ Make sure you have the following installed:
 ### Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/Noushidh/taskflow-pro.git
